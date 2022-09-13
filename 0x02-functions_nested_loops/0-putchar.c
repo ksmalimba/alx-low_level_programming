@@ -5,12 +5,13 @@
  */
 int main(void)
 {
-	char *x = "Lihlesss";
+	int n = 0;
+	char str_s[9] = "aaaaaaaaa";
 
-	while (*x)
+	while (n < 9)
 	{
-		_putchar(*x);
-		x++;
+		_putchar(str_s[n]);
+		n++;
 	}
 	_putchar('\n');
 	return (0);
