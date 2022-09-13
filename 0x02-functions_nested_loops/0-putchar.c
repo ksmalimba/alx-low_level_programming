@@ -6,7 +6,7 @@
 int main(void)
 {
 	int n = 0;
-	char str_s[9] = "aaaaaaaa";
+	char str_s[9] = "aaaaaaa";
 
 	while (n < 9)
 	{
