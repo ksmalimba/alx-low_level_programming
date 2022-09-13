@@ -5,7 +5,7 @@
  */
 int main(void)
 {
-	char *x = "Lihle";
+	char *x = "Lihlessss";
 
 	while (*x)
 	{
