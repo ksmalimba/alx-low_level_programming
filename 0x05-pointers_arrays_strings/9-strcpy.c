@@ -1,10 +1,11 @@
 #include "main.h"
 
 /**
- * _strcpy - copies the string
+ * _strcpy - function  copies the string
  * @sdes: pointer to the char
- * @src : pointer tosource of char
- * return : char
+ * @src: pointer tosource of char
+ *
+ * Return: cinnnrip
  */
 
 char *_strcpy(char *sdes, char *src)
