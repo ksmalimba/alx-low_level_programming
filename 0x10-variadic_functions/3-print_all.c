@@ -1,46 +1,97 @@
-	printf("%s%c", separator, va_arg(args, int));
+#include <stdio.h>
+#include <stdlib.h>
+#include "variadic_functions.h"
+
+/**
+ * print_i - prints int
+ * @list: arguement of list
+ * @s: seperator
+ * Return: none
+ */
+
+void print_i(va_list list, char *s)
+{
+	printf("%s%d", s, va_arg(list, int));
 }
 
 /**
-  * print_a_integer - Prints a character of integer type
-  * @separator: The separator of the character
-  * @args: A list of variadic arguments
-  *
-  * Return: Nothing
-  */
-void print_a_integer(char *separator, va_list args)
+ * print_c - prints char
+ * @list: arguement char
+ * @sep: seperator
+ */
+
+void print_c(va_list list, char *sep)
 {
-	printf("%s%i", separator, va_arg(args, int));
+	printf("%s%c", sep, va_arg(list, int));
 }
 
 /**
-  * print_a_float - Prints a character of float type
-  * @separator: The separator of the character
-  * @args: A list of variadic arguments
-  *
-  * Return: Nothing
-  */
-void print_a_float(char *separator, va_list args)
+ * print_s - prints string
+ * @sep: seperator
+ * @list: list to print
+ * Return: none
+ */
+
+void print_s(va_list list, char *sep)
 {
-	printf("%s%f", separator, va_arg(args, double));
+	char *s;
+
+	s = va_arg(list, char *);
+	if (s == NULL)
+		s = "(nil)";
+	printf("%s%s", sep, s);
 }
 
 /**
-  * print_a_char_ptr - Prints the content of pointer to char type
-  * @separator: The separator of the character
-  * @args: A list of variadic arguments
-  *
-  * Return: Nothing
-  */
-void print_a_char_ptr(char *separator, va_list args)
-{
-	char *arg = va_arg(args, char *);
+ * print_f - prints floats
+ * @sep: float to print
+ * @list: next arguement of list to print
+ * Return: none
+ */
 
-	if (arg == NULL)
+void print_f(va_list list, char *sep)
+{
+	printf("%s%f", sep, va_arg(list, double));
+}
+
+/**
+ * print_all -  function that prints anything
+ * @format:  list of types of arguments passed to the function
+ * Return: nothing
+ */
+
+void print_all(const char * const format, ...)
+{
+	va_list list;
+	int i, j;
+	char *separator;
+
+	type_t ops[] = {
+		{"c", print_c},
+		{"i", print_i},
+		{"f", print_f},
+		{"s", print_s},
+		{NULL, NULL}
+	};
+
+	va_start(list, format);
+	i = 0;
+	separator = "";
+	while (format != NULL && format[i] != '\0')
 	{
-		printf("%s%s", separator, "(nil)");
-		return;
-	}
+		j = 0;
+		while (j < 4)
+		{
+			if (format[i] == *(ops[j]).op)
+			{
+				ops[j].f(list, separator);
+				separator = ", ";
 
-	printf("%s%s", separator, arg);
+			}
+			j++;
+		}
+		i++;
+	}
+	printf("\n");
+	va_end(list);
 }
